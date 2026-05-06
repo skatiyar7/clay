@@ -6,7 +6,7 @@ var path = require("path");
 var os = require("os");
 
 var { generateAuthToken, verifyPin } = require("../lib/server");
-var { safePath, validateEnvString } = require("../lib/project");
+var { safePath, safeAbsPath, validateEnvString } = require("../lib/project");
 var { chmodSafe } = require("../lib/config");
 
 // ============================================================
@@ -93,6 +93,17 @@ test("safePath returns base dir for empty path", function () {
   var tmpDir = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "safe-")));
   var result = safePath(tmpDir, "");
   assert.strictEqual(result, tmpDir, "Empty path should resolve to base");
+  fs.rmSync(tmpDir, { recursive: true });
+});
+
+test("safeAbsPath recovers missing leading slash for absolute-looking POSIX paths", function () {
+  if (process.platform === "win32") return;
+
+  var tmpDir = fs.realpathSync(fs.mkdtempSync(path.join(os.tmpdir(), "safe-abs-")));
+  var missingSlash = tmpDir.replace(/^\/+/, "");
+  var result = safeAbsPath(missingSlash);
+
+  assert.strictEqual(result, tmpDir, "Missing slash POSIX path should resolve to the real absolute path");
   fs.rmSync(tmpDir, { recursive: true });
 });
 
