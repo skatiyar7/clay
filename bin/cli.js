@@ -51,7 +51,9 @@ function openUrl(url) {
 
 var args = process.argv.slice(2);
 var port = _isDev ? 2635 : 2633;
+var portExplicit = false;
 var useHttps = true;
+var useHttpsExplicit = false;
 var forceMkcert = false;
 var forceBuiltin = false;
 var skipUpdate = false;
@@ -73,6 +75,7 @@ var osUsersMode = false;
 for (var i = 0; i < args.length; i++) {
   if (args[i] === "-p" || args[i] === "--port") {
     port = parseInt(args[i + 1], 10);
+    portExplicit = true;
     if (isNaN(port)) {
       console.error("Invalid port number");
       process.exit(1);
@@ -83,6 +86,7 @@ for (var i = 0; i < args.length; i++) {
     i++;
   } else if (args[i] === "--no-https") {
     useHttps = false;
+    useHttpsExplicit = true;
   } else if (args[i] === "--local-cert") {
     forceMkcert = true;
   } else if (args[i] === "--builtin-cert") {
@@ -2633,19 +2637,27 @@ var currentVersion = require("../package.json").version;
       clearStaleConfig();
       await new Promise(function (resolve) { setTimeout(resolve, 500); });
     }
-    // No running daemon — clear config so setup runs fresh
+    // No running daemon — clear stale pid but preserve config for reuse
     if (!devAlive && devConfig) {
       if (devConfig.pid) clearStaleConfig();
-      devConfig = null;
     }
-    // No config — go through setup (disclaimer, port, mode, etc.)
-    if (!devConfig) {
+    // Determine effective config: CLI flags override saved values
+    if (devConfig && devConfig.setupCompleted) {
+      var _savedDevMode = multiUserMode ? "multi" : (devConfig.mode || "single");
+      var _savedOsUsers = osUsersMode || devConfig.osUsers || false;
+      if (!portExplicit && devConfig.port) port = devConfig.port;
+      if (!useHttpsExplicit && devConfig.tls !== undefined) useHttps = devConfig.tls;
+      if (!dangerouslySkipPermissions && devConfig.dangerouslySkipPermissions) dangerouslySkipPermissions = true;
+      await devMode(_savedDevMode, devConfig.keepAwake || false, devConfig.pinHash || null, _savedOsUsers);
+    } else if (multiUserMode || autoYes) {
+      // No saved config but CLI flags provide enough to skip wizard
+      var _devMode2 = multiUserMode ? "multi" : "single";
+      await devMode(_devMode2, false, null, osUsersMode || false);
+    } else {
+      // First run: interactive wizard
       setup(function (mode, keepAwake, wantOsUsers) {
         devMode(mode, keepAwake, null, wantOsUsers);
       });
-    } else {
-      // Reuse existing config (repeat run)
-      await devMode(devConfig.mode || "single", devConfig.keepAwake || false, devConfig.pinHash || null, devConfig.osUsers || false);
     }
     return;
   }
