@@ -1,10 +1,10 @@
 # Claude Agent SDK Upgrade Tracker
 
 Installed: `@anthropic-ai/claude-agent-sdk@0.2.112` (Claude Code 2.1.112)
-Latest: `@anthropic-ai/claude-agent-sdk@0.2.123` (Claude Code 2.1.123, 2026-04-29)
-Updated: 2026-04-30
+Latest: `@anthropic-ai/claude-agent-sdk@0.2.132` (Claude Code 2.1.132, 2026-05-07)
+Updated: 2026-05-07
 
-Covers all unapplied changes from 0.2.80 through 0.2.123.
+Covers all unapplied changes from 0.2.80 through 0.2.132.
 Codex multi-provider expansion planned. Items marked with Codex support are worth building as platform-common features.
 
 **Deliberate parity divergences** (decisions that go beyond per-API skip judgments) are tracked at the bottom of this file under "Parity Divergences" so the rationale is preserved alongside the upgrade trail.
@@ -15,7 +15,7 @@ Codex multi-provider expansion planned. Items marked with Codex support are wort
 
 ## Master Item Table
 
-59 items total. Action: **Do** = implement, **Skip** = not needed. Codex: **x** = reusable for Codex (build as platform-common).
+67 items total. Action: **Do** = implement, **Skip** = not needed. Codex: **x** = reusable for Codex (build as platform-common).
 
 ### P1 - High (functional gaps, user-facing impact)
 
@@ -125,6 +125,39 @@ Codex multi-provider expansion planned. Items marked with Codex support are wort
 | 59 | `foldSessionSummary()` (0.2.117, alpha) | Defer | | Sidecar summary index for SessionStore. Revisit when #58 lands | -- |
 
 
+### New in 0.2.124-0.2.132 (added 2026-05-07)
+
+Diff is small — mostly Remote Control toggles and SessionStore alpha extensions. No `Do` items beyond a single error string and an extension of #10 scope.
+
+#### Verify (might affect us)
+
+| # | Item | Action | Codex | Current status | Where |
+|---|------|--------|:-----:|----------------|-------|
+| 60 | `applyFlagSettings` accepts `null` per-key (0.2.132) | **Verify** | | API now lets callers clear a flag-layer key by passing `null`. Confirm we don't pass `null` accidentally in any call site (we currently don't use this API at all, so likely no-op) | `sdk-bridge.js` |
+
+#### P3 - Low
+
+| # | Item | Action | Codex | Current status | Where |
+|---|------|--------|:-----:|----------------|-------|
+| 61 | `oauth_org_not_allowed` error type (0.2.124) | **Do** | | New `SDKAssistantMessageError` value. Surface as a distinct error message rather than falling through the `unknown` bucket | `sdk-message-processor.js`, client error display |
+| 62 | `origin` extended to replay messages (0.2.124) | **Do** | x | `SDKUserMessageReplay` / `SDKAssistantMessageReplay` gained `origin?`. Folds into #10 — propagate origin through replay path too | extends #10 |
+| 63 | `alwaysLoad` startup-block side effect (0.2.128 doc) | **Do** | x | `alwaysLoad: true` blocks startup until the MCP server connects (capped at 5s). Document this in our MCP UI when the toggle is exposed | extends #53 |
+
+#### Skip
+
+| # | Item | Action | Codex | Current status | Where |
+|---|------|--------|:-----:|----------------|-------|
+| 64 | `Options.isolatePeerMachines` (0.2.124) | Skip | | Remote Control multi-machine peer isolation. Clay doesn't use Remote Control | -- |
+| 65 | `Settings.disableRemoteControl` (0.2.128) | Skip | | Org-level Remote Control disable. Clay doesn't surface Remote Control | -- |
+| 66 | `suppressOriginalPrompt` on permission decision (0.2.128) | Skip | | SDK-side prompt redaction in block messages. Relay handles its own permission UX | -- |
+
+#### Defer
+
+| # | Item | Action | Codex | Current status | Where |
+|---|------|--------|:-----:|----------------|-------|
+| 67 | `Options.sessionStoreFlush: 'batched' \| 'eager'` (0.2.128, alpha) | Defer | | Flush strategy for SessionStore mirroring. Relevant only if #58 lands | -- |
+
+
 ---
 
 
@@ -133,11 +166,11 @@ Codex multi-provider expansion planned. Items marked with Codex support are wort
 | | Count | Items |
 |--|-------|-------|
 | **Done** | 4 | ~~#1-4~~ |
-| **Do** | 25 | #6-12, #14-18, #28, #30, #32-33, #45-53 |
-| of which **Codex-reusable** | 13 | #7, #8, #10, #12, #15-18, #30, #46, #49, #51-53 |
-| **Verify** | 1 | #44 |
-| Skip | 23 | #5, #13, #19-27, #29, #31, #34-39, #54-57 |
-| Defer | 6 | #40-43, #58-59 |
+| **Do** | 28 | #6-12, #14-18, #28, #30, #32-33, #45-53, #61-63 |
+| of which **Codex-reusable** | 15 | #7, #8, #10, #12, #15-18, #30, #46, #49, #51-53, #62, #63 |
+| **Verify** | 2 | #44, #60 |
+| Skip | 26 | #5, #13, #19-27, #29, #31, #34-39, #54-57, #64-66 |
+| Defer | 7 | #40-43, #58-59, #67 |
 
 
 ---
@@ -153,12 +186,84 @@ Codex multi-provider expansion planned. Items marked with Codex support are wort
 5. ~~Add `'xhigh'` to effort selector UI~~
 6. ~~Handle new message types: `task_updated`, `notification`, `plugin_install`~~
 
-### 0.2.112 -> 0.2.123 (next)
+### 0.2.112 -> 0.2.132 (next)
 1. **Verify** `query()` `settingSources` behavior (#44). Pass explicit `settingSources: ["user", "project", "local"]` already (relay does this) — confirm no regression.
-2. `npm install @anthropic-ai/claude-agent-sdk@0.2.123`
-3. Implement P1 quick wins: `Options.title` (#45), `forwardSubagentText` (#46), `Options.skills` (#47).
-4. Implement #6-12, #14-18 backlog as bandwidth allows.
-5. Tool `duration_ms` (#52) feeds #30 toolStats — implement together.
+2. **Verify** `applyFlagSettings` (#60). Currently unused by relay; confirm before bumping in case any future call passes `null`.
+3. `npm install @anthropic-ai/claude-agent-sdk@0.2.132`
+4. Implement P1 quick wins: `Options.title` (#45), `forwardSubagentText` (#46), `Options.skills` (#47).
+5. Implement #6-12, #14-18 backlog as bandwidth allows.
+6. Tool `duration_ms` (#52) feeds #30 toolStats — implement together.
+7. Add `oauth_org_not_allowed` error path (#61) and extend origin propagation to replay messages (#62) when touching #10.
+
+
+---
+
+
+## Application Priority (2026-05-07)
+
+The `Do` list has 28 open items. This is the order to apply them, ranked by **user-visible impact / implementation cost / risk**. Items in the same wave can share a PR; cross-wave items should land sequentially.
+
+### Wave 0 — Pre-bump verification (gating, must finish before npm install)
+
+| # | Item | Why first | Cost |
+|---|------|-----------|------|
+| 44 | `settingSources` default change verify (0.2.119) | Behavior change. Relay passes `settingSources` explicitly today, but every call site needs a one-line audit so the bump can't silently flip auto-title or any subagent path back to "load all sources". | XS |
+| 60 | `applyFlagSettings` `null` semantics verify (0.2.132) | We don't call this API today, but future Claude Code conventions may; confirm and add a comment so the next person knows. | XS |
+
+After these, run `npm install @anthropic-ai/claude-agent-sdk@0.2.132` and a full smoke test.
+
+### Wave 1 — Quick visible wins (small diffs, immediate user benefit)
+
+| # | Item | Why | Cost |
+|---|------|-----|------|
+| 45 | `Options.title` | Lets the host set the session title at creation. Bypasses the auto-title query entirely for cases where the title is known upfront (loops, scheduled, mate-seeded). Reduces "ghost Claude session" surface and saves a haiku call per session. | S |
+| 52 + 30 | Tool `duration_ms` + Task `toolStats` | Pair. Per-tool wall time + per-task tool counts feed a single "what just happened" summary at task end. Claude provides #52; #30 we can polyfill at relay level so Codex works too. | M |
+| 18 | Compact result/error + metadata | Currently we show "Compacting..." with no result. Adding `compact_result`, `compact_error`, `post_tokens`, `duration_ms` makes compaction visible and debuggable ("Compacted: 120k → 45k in 1.2s"). | S |
+| 33 | Elicitation display fields | `title`, `display_name`, `description` on permission/elicitation. Users currently see raw tool names. Trivial render change with high readability gain. | XS |
+| 61 | `oauth_org_not_allowed` error | One new error string, surface clearly so users with org-restricted OAuth see a useful message instead of "unknown error". | XS |
+
+### Wave 2 — Foundational (enables later work, low-medium cost)
+
+| # | Item | Why | Cost |
+|---|------|-----|------|
+| 10 + 62 | `SDKMessageOrigin` (incl. replay) | Relay already knows message source. Tagging it through the SDK enables future "from coordinator" / "from peer" UX without provider-specific code. Pair with #62 to cover replay too. | S |
+| 47 | `Options.skills` (`'all' \| string[]`) | Replaces ad-hoc `allowedTools: ["Skill"]` plumbing with the canonical enabler. Cleans up a chunk of skill discovery code. | M |
+| 7 | `TerminalReason` | Already partial. Forward `terminal_reason` cleanly so we can show "Stopped: prompt too long", "Max turns reached", etc. instead of generic abort. | S |
+
+### Wave 3 — Capability extensions (medium cost, real new features)
+
+| # | Item | Why | Cost |
+|---|------|-----|------|
+| 9 + 46 | `listSubagents()` / `getSubagentMessages()` + `forwardSubagentText` | Subagent transparency. Without #46 the host only sees subagent tool calls, not their text/thinking. With both, we can render subagent transcripts inline. | M |
+| 11 | `systemPrompt` array + cache boundary | Direct cost/speed impact: split static prefix (mate identity, project rules) from dynamic suffix so the Anthropic prompt cache hits across sessions. ROI grows with mate count and session frequency. | M |
+| 6 | `startup()` + `WarmQuery` | Pre-warms a subprocess so the first message has no cold-start latency. Visible only on cold sessions; user-perceived only when many short sessions are opened. | M |
+| 8 | `reloadPlugins()` | Hot-reload MCP / skills / agents without session restart. UX improvement, not blocking. | S |
+
+### Wave 4 — Polish and niche (low priority, do when bored)
+
+| # | Item | Why later |
+|---|------|-----------|
+| 12 | `McpServerToolPolicy` | Per-tool MCP permission policies. Useful but low-frequency. |
+| 14 | `SDKControlRequestUserDialogRequest` | OAuth/custom dialogs. Only matters when an MCP server actually requests one. |
+| 15 | `SDKPluginInstallMessage` | "Loading plugin..." progress. Currently silent; users probably don't notice. |
+| 16 | Thinking display modes (`summarized`/`omitted`) | Toggle for verbose thinking. Nice control, not blocking. |
+| 17 | `ttft_ms` | Time-to-first-token. Mostly diagnostic. |
+| 28 | Settings UI (5 fields) | New checkbox/numeric inputs. Mechanical. |
+| 32 | `skip_transcript` | Filter housekeeping tasks from sub-agent list. Edge case. |
+| 49 | `SDKControlMcpCallRequest` | Silent MCP invocation via control channel. Useful but no concrete need yet. |
+| 50 | `SDKControlReadFileRequest` + `readFile()` | Gated file reads. Useful for relay-controlled file viewers, but our viewer doesn't need it. |
+| 51 | `SDKControlGetSessionCostRequest` | Formatted cost summary text. We compute this client-side already. |
+| 53 + 63 | MCP `alwaysLoad` + startup-block doc | Niche per-server toggle. |
+| 48 | `Options.planModeInstructions` | Per-mate plan-mode customization. Useful for advanced mate authors only. |
+
+### What this priority means concretely
+
+- **Wave 0 today** (1 hour, gating).
+- **Bump SDK to 0.2.132** (15 min + smoke test).
+- **Wave 1 next session** (~half day total). Highest user-visible payoff.
+- **Wave 2 within the same week.** Sets up Wave 3.
+- **Wave 3 next week.** Real capability additions.
+- **Wave 4 ad hoc** as bandwidth allows.
 
 
 ---

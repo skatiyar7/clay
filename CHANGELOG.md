@@ -1,3 +1,99 @@
+# [2.38.0-beta.6](https://github.com/chadbyte/clay/compare/v2.38.0-beta.5...v2.38.0-beta.6) (2026-05-08)
+
+
+### Bug Fixes
+
+* **clay:** forward home_clay_* messages to the server-level handler ([a5f789a](https://github.com/chadbyte/clay/commit/a5f789ac9a569c8777506cdad835e56840b4c9c4))
+
+# [2.38.0-beta.5](https://github.com/chadbyte/clay/compare/v2.38.0-beta.4...v2.38.0-beta.5) (2026-05-07)
+
+
+### Features
+
+* **clay:** smaller FAB-popover and draggable FAB position ([fda4a0f](https://github.com/chadbyte/clay/commit/fda4a0f225b482b10f7b01594143b5a66c98e1e5))
+
+# [2.38.0-beta.4](https://github.com/chadbyte/clay/compare/v2.38.0-beta.3...v2.38.0-beta.4) (2026-05-07)
+
+
+### Features
+
+* **clay:** turn home chat into a persistent FAB-popover ([a55b246](https://github.com/chadbyte/clay/commit/a55b246e342f2f4b12d304d79d77e73a901c43d4)), closes [#clay-fab](https://github.com/chadbyte/clay/issues/clay-fab) [#clay-popover](https://github.com/chadbyte/clay/issues/clay-popover) [#home-hub](https://github.com/chadbyte/clay/issues/home-hub)
+
+# [2.38.0-beta.3](https://github.com/chadbyte/clay/compare/v2.38.0-beta.2...v2.38.0-beta.3) (2026-05-07)
+
+
+### Features
+
+* **clay:** standalone phablet-style home chat panel and hide Clay from sidebar ([b99dd18](https://github.com/chadbyte/clay/commit/b99dd181f96e830f99859c3855a2cb05dedac80e)), closes [#home-hub](https://github.com/chadbyte/clay/issues/home-hub)
+
+# [2.38.0-beta.2](https://github.com/chadbyte/clay/compare/v2.38.0-beta.1...v2.38.0-beta.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* **clay:** use Clay app icon for Clay avatar instead of Ally asset ([48a4337](https://github.com/chadbyte/clay/commit/48a4337f60e5bf16d39ed8887e73065fdd1bc68a))
+
+# [2.38.0-beta.1](https://github.com/chadbyte/clay/compare/v2.37.0...v2.38.0-beta.1) (2026-05-07)
+
+
+### Features
+
+* **clay:** introduce Clay host agent and split Home into Clay chat + widgets ([d6081ae](https://github.com/chadbyte/clay/commit/d6081ae504a4a6cb60f075d56a9205a79ba95ebb))
+
+# [2.37.0](https://github.com/chadbyte/clay/compare/v2.36.1...v2.37.0) (2026-05-07)
+
+
+### Bug Fixes
+
+* **context:** show correct model name and 1M window for [1m] beta models ([f145c9f](https://github.com/chadbyte/clay/commit/f145c9f7b2af97f5567232ebc588357b0fe763e2))
+* **model:** resolve shorthand model names against vendor model list ([d8d11c6](https://github.com/chadbyte/clay/commit/d8d11c6ff229dad1fa806f1c90ae290cd4c8d721))
+* **pin:** allow forced PIN change without re-entering temp PIN, add logout ([fb04677](https://github.com/chadbyte/clay/commit/fb04677024df95349c61cf117dff3abd96f4b516))
+* **pin:** mirror login PIN UI on temp PIN setup overlay ([c2af16d](https://github.com/chadbyte/clay/commit/c2af16da37f46144beabae5d44dffbbd662184af))
+* **pin:** show focus indicator and reliable digit capture on temp PIN setup ([77e6b88](https://github.com/chadbyte/clay/commit/77e6b88dfd07b85785a2edcd2b74792bac53bfeb))
+* **pin:** unify forced-PIN-change UI through main app overlay ([a5f37dc](https://github.com/chadbyte/clay/commit/a5f37dcd326c05c5be045b8260fb19f550925b85))
+* **rewind:** expose rewindFiles on worker QueryHandle ([a684fa8](https://github.com/chadbyte/clay/commit/a684fa8bfa32cf02897727741b40ce1be3033ddb))
+* **scroll:** respect user scroll-up during streaming response ([c440820](https://github.com/chadbyte/clay/commit/c440820b92bbd7709228b1aac0881f0a63a73a80))
+* **ui:** clear pre-thinking dots on more turn events and add 90s safety timeout ([5d91bc2](https://github.com/chadbyte/clay/commit/5d91bc2ec43c823c1844323870c7175049212abc))
+* **ui:** show vendor avatar next to inline activity dots ([c8f2de6](https://github.com/chadbyte/clay/commit/c8f2de6ba5383fc47d6ea84bc244c6d000d727c8))
+
+
+### Features
+
+* **sdk:** bump claude-agent-sdk to 0.2.132 and set Options.title at creation ([f46b06d](https://github.com/chadbyte/clay/commit/f46b06dc73d13f2cfc846bf5788d2ae896582e66)), closes [#45](https://github.com/chadbyte/clay/issues/45)
+
+
+### Performance Improvements
+
+* **resume:** batch syntax highlight, compact dead-session todos, lower initial page ([182c6ca](https://github.com/chadbyte/clay/commit/182c6cacae1d7fd73fae6734f8e3fd1f09038c2a)), closes [#342](https://github.com/chadbyte/clay/issues/342) [#345](https://github.com/chadbyte/clay/issues/345)
+
+# [2.37.0-beta.2](https://github.com/chadbyte/clay/compare/v2.37.0-beta.1...v2.37.0-beta.2) (2026-05-07)
+
+
+### Bug Fixes
+
+* **scroll:** respect user scroll-up during streaming response ([c440820](https://github.com/chadbyte/clay/commit/c440820b92bbd7709228b1aac0881f0a63a73a80))
+
+# [2.37.0-beta.1](https://github.com/chadbyte/clay/compare/v2.36.2-beta.9...v2.37.0-beta.1) (2026-05-07)
+
+
+### Features
+
+* **sdk:** bump claude-agent-sdk to 0.2.132 and set Options.title at creation ([f46b06d](https://github.com/chadbyte/clay/commit/f46b06dc73d13f2cfc846bf5788d2ae896582e66)), closes [#45](https://github.com/chadbyte/clay/issues/45)
+
+## [2.36.2-beta.9](https://github.com/chadbyte/clay/compare/v2.36.2-beta.8...v2.36.2-beta.9) (2026-05-07)
+
+
+### Bug Fixes
+
+* **ui:** show vendor avatar next to inline activity dots ([c8f2de6](https://github.com/chadbyte/clay/commit/c8f2de6ba5383fc47d6ea84bc244c6d000d727c8))
+
+## [2.36.2-beta.8](https://github.com/chadbyte/clay/compare/v2.36.2-beta.7...v2.36.2-beta.8) (2026-05-07)
+
+
+### Bug Fixes
+
+* **ui:** clear pre-thinking dots on more turn events and add 90s safety timeout ([5d91bc2](https://github.com/chadbyte/clay/commit/5d91bc2ec43c823c1844323870c7175049212abc))
+
 ## [2.36.2-beta.7](https://github.com/chadbyte/clay/compare/v2.36.2-beta.6...v2.36.2-beta.7) (2026-05-05)
 
 
