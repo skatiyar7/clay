@@ -545,3 +545,78 @@
 /* ==========================================================================
    (Certificate section removed — now handled by Trust Certificate playbook)
    ========================================================================== */
+
+/* --- Live Claude sessions card --- */
+
+.hub-live-sessions {
+  margin-bottom: 16px;
+}
+
+.hub-live-sessions .hub-card-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.hub-live-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hub-live-group {
+  margin: 8px 0 3px;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-dimmer);
+  letter-spacing: 0.3px;
+}
+
+.hub-live-group:first-child {
+  margin-top: 2px;
+}
+
+.hub-live-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.hub-live-item:hover {
+  background: rgba(var(--overlay-rgb), 0.06);
+}
+
+.hub-live-item.no-project {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.hub-live-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text);
+}
+
+.hub-live-open {
+  font-size: 10px;
+  color: var(--text-dimmer);
+  flex-shrink: 0;
+}
+
+.hub-live-item:hover .hub-live-open {
+  color: #2ecc71;
+}
+
+.hub-live-hint {
+  font-size: 10px;
+  color: var(--text-dimmer);
+  flex-shrink: 0;
+  font-style: italic;
+}

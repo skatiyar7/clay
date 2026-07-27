@@ -37,6 +37,8 @@ Wires all modules, sets up session manager and SDK bridge, dispatches messages.
 | `project-mate-interaction.js` | (called from project.js) `mention`, `mention_stop` | @mention handling, DM digests |
 | `project-user-mention.js` | (called from project.js) `user_mention` | User-to-user @mention side conversations within a session. Records to history, broadcasts to other session viewers, queues transcript into `pendingMentionContexts` for the next coding-agent turn, fires alarm-center notification + push for the target user (push only when offline) |
 | `project-memory.js` | `memory_list`, `memory_search`, `memory_delete` | Session digest memory |
+| `project-live-sessions.js` | `list_live_cli_sessions`, `live_mirror_detach` | Live terminal CLI session detection (Claude Code process registry via `live-registry.js`, mtime fallback), live-mirror tailing of attached sessions, `live_cli_sessions` + `live_mirror_state` broadcasts |
+| `live-registry.js` | (library) | Reader for Claude Code's running-process registry (`~/.claude/sessions/*.json`), PID liveness check. Used by `project-live-sessions.js` and the server-level `/api/live-sessions` endpoint (cross-workspace home hub card) |
 | `project-mcp.js` | `mcp_servers_available`, `mcp_tool_result`, `mcp_tool_error`, `mcp_toggle_server` | Remote MCP server bridge via Chrome Extension |
 
 ### Infrastructure Modules

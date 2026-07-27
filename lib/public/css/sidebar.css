@@ -1995,3 +1995,63 @@
   50% { opacity: 0.18; }
   100% { opacity: 0.1; }
 }
+
+/* --- Live terminal sessions --- */
+
+.session-live-section {
+  margin-bottom: 4px;
+}
+
+.session-live-header {
+  gap: 6px;
+  justify-content: flex-start;
+  color: #2ecc71;
+}
+
+.session-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2ecc71;
+  animation: live-pulse 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+.session-live-badge {
+  display: inline-block;
+  margin-left: 6px;
+  margin-right: 6px;
+  padding: 0 5px;
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  line-height: 14px;
+  vertical-align: middle;
+  color: #2ecc71;
+  background: rgba(46, 204, 113, 0.14);
+  border: 1px solid rgba(46, 204, 113, 0.35);
+  animation: live-pulse 1.6s ease-in-out infinite;
+}
+
+.session-live-item {
+  cursor: pointer;
+}
+
+.session-live-branch {
+  font-size: 10px;
+  color: var(--text-dimmer);
+  margin-left: auto;
+  padding-left: 6px;
+  flex-shrink: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90px;
+  white-space: nowrap;
+}
+
+@keyframes live-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.45; }
+  100% { opacity: 1; }
+}
