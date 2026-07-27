@@ -1,3 +1,357 @@
+# [2.47.0-beta.1](https://github.com/chadbyte/clay/compare/v2.46.0...v2.47.0-beta.1) (2026-07-20)
+
+
+### Features
+
+* **codex:** add GPT-5.6 sol/terra/luna models ([#384](https://github.com/chadbyte/clay/issues/384)) ([cd56498](https://github.com/chadbyte/clay/commit/cd564984a467926e80e773bc400f3311172bc105))
+
+# [2.46.0](https://github.com/chadbyte/clay/compare/v2.45.0...v2.46.0) (2026-07-03)
+
+
+### Features
+
+* **deps:** bump claude-agent-sdk to 0.3.198 for Claude Fable 5 support ([#381](https://github.com/chadbyte/clay/issues/381)) ([fc9baab](https://github.com/chadbyte/clay/commit/fc9baab75b8fde8511840921c597ea3de7b6f5ae))
+
+# [2.46.0-beta.1](https://github.com/chadbyte/clay/compare/v2.45.0...v2.46.0-beta.1) (2026-07-02)
+
+
+### Features
+
+* **deps:** bump claude-agent-sdk to 0.3.198 for Claude Fable 5 support ([#381](https://github.com/chadbyte/clay/issues/381)) ([fc9baab](https://github.com/chadbyte/clay/commit/fc9baab75b8fde8511840921c597ea3de7b6f5ae))
+
+# [2.45.0](https://github.com/chadbyte/clay/compare/v2.44.0...v2.45.0) (2026-07-01)
+
+
+### Bug Fixes
+
+* **codex:** logged-out detection, login modal, and model listing ([#378](https://github.com/chadbyte/clay/issues/378)) ([a3314b0](https://github.com/chadbyte/clay/commit/a3314b041fada2ccbb6cadede8c37f4997d40922))
+* **model-picker:** show model picker for Claude GUI sessions ([#375](https://github.com/chadbyte/clay/issues/375)) ([6b6feb8](https://github.com/chadbyte/clay/commit/6b6feb86ba41cb880ca295055d8b4a2043c37523))
+* **os-users:** inherit supplementary groups in spawned sessions ([#371](https://github.com/chadbyte/clay/issues/371)) ([8c5aae0](https://github.com/chadbyte/clay/commit/8c5aae0a0c7eccdedfc862616da3223143cd171a)), closes [#367](https://github.com/chadbyte/clay/issues/367)
+* **os-users:** skip per-user Claude CLI install when already available ([#370](https://github.com/chadbyte/clay/issues/370)) ([761f6a5](https://github.com/chadbyte/clay/commit/761f6a5694a2d0ddb7a6eab4c73ba769f3160097)), closes [#368](https://github.com/chadbyte/clay/issues/368)
+
+
+### Features
+
+* **auth:** auto-open a modal login terminal when not logged in ([#376](https://github.com/chadbyte/clay/issues/376)) ([21136ec](https://github.com/chadbyte/clay/commit/21136ecdab262d16e9dfdfbe02f22ecb62c60ee9))
+* **mates:** default Mates off (opt-in) ([#374](https://github.com/chadbyte/clay/issues/374)) ([dc1736f](https://github.com/chadbyte/clay/commit/dc1736f64a3fa9f1a03af3e33895ff75ddbf70ae))
+* **whats-new:** add "GUI is back" and stop popping superseded entries ([#379](https://github.com/chadbyte/clay/issues/379)) ([e328b9f](https://github.com/chadbyte/clay/commit/e328b9fbc97f7d94697c1f0d022c0fea39c42126))
+
+# [2.45.0-beta.4](https://github.com/chadbyte/clay/compare/v2.45.0-beta.3...v2.45.0-beta.4) (2026-07-01)
+
+
+### Bug Fixes
+
+* **codex:** logged-out detection, login modal, and model listing ([#378](https://github.com/chadbyte/clay/issues/378)) ([a3314b0](https://github.com/chadbyte/clay/commit/a3314b041fada2ccbb6cadede8c37f4997d40922))
+
+
+### Features
+
+* **whats-new:** add "GUI is back" and stop popping superseded entries ([#379](https://github.com/chadbyte/clay/issues/379)) ([e328b9f](https://github.com/chadbyte/clay/commit/e328b9fbc97f7d94697c1f0d022c0fea39c42126))
+
+# [2.45.0-beta.4](https://github.com/chadbyte/clay/compare/v2.45.0-beta.3...v2.45.0-beta.4) (2026-07-01)
+
+
+### Bug Fixes
+
+* **codex:** logged-out detection, login modal, and model listing ([#378](https://github.com/chadbyte/clay/issues/378)) ([a3314b0](https://github.com/chadbyte/clay/commit/a3314b041fada2ccbb6cadede8c37f4997d40922))
+
+
+### Features
+
+* **whats-new:** add "GUI is back" and stop popping superseded entries ([#379](https://github.com/chadbyte/clay/issues/379)) ([e328b9f](https://github.com/chadbyte/clay/commit/e328b9fbc97f7d94697c1f0d022c0fea39c42126))
+
+# [2.45.0-beta.4](https://github.com/chadbyte/clay/compare/v2.45.0-beta.3...v2.45.0-beta.4) (2026-07-01)
+
+
+### Bug Fixes
+
+* **codex:** logged-out detection, login modal, and model listing ([#378](https://github.com/chadbyte/clay/issues/378)) ([a3314b0](https://github.com/chadbyte/clay/commit/a3314b041fada2ccbb6cadede8c37f4997d40922))
+
+
+### Features
+
+* **whats-new:** add "GUI is back" and stop popping superseded entries ([#379](https://github.com/chadbyte/clay/issues/379)) ([e328b9f](https://github.com/chadbyte/clay/commit/e328b9fbc97f7d94697c1f0d022c0fea39c42126))
+
+# [2.45.0-beta.4](https://github.com/chadbyte/clay/compare/v2.45.0-beta.3...v2.45.0-beta.4) (2026-07-01)
+
+
+### Bug Fixes
+
+* **codex:** logged-out detection, login modal, and model listing ([#378](https://github.com/chadbyte/clay/issues/378)) ([a3314b0](https://github.com/chadbyte/clay/commit/a3314b041fada2ccbb6cadede8c37f4997d40922))
+
+# [2.45.0-beta.3](https://github.com/chadbyte/clay/compare/v2.45.0-beta.2...v2.45.0-beta.3) (2026-07-01)
+
+
+### Features
+
+* **auth:** auto-open a modal login terminal when not logged in ([#376](https://github.com/chadbyte/clay/issues/376)) ([21136ec](https://github.com/chadbyte/clay/commit/21136ecdab262d16e9dfdfbe02f22ecb62c60ee9))
+
+# [2.45.0-beta.2](https://github.com/chadbyte/clay/compare/v2.45.0-beta.1...v2.45.0-beta.2) (2026-06-30)
+
+
+### Bug Fixes
+
+* **model-picker:** show model picker for Claude GUI sessions ([#375](https://github.com/chadbyte/clay/issues/375)) ([6b6feb8](https://github.com/chadbyte/clay/commit/6b6feb86ba41cb880ca295055d8b4a2043c37523))
+
+# [2.45.0-beta.1](https://github.com/chadbyte/clay/compare/v2.44.1-beta.2...v2.45.0-beta.1) (2026-06-30)
+
+
+### Features
+
+* **mates:** default Mates off (opt-in) ([#374](https://github.com/chadbyte/clay/issues/374)) ([dc1736f](https://github.com/chadbyte/clay/commit/dc1736f64a3fa9f1a03af3e33895ff75ddbf70ae))
+
+## [2.44.1-beta.2](https://github.com/chadbyte/clay/compare/v2.44.1-beta.1...v2.44.1-beta.2) (2026-06-30)
+
+
+### Bug Fixes
+
+* **os-users:** inherit supplementary groups in spawned sessions ([#371](https://github.com/chadbyte/clay/issues/371)) ([8c5aae0](https://github.com/chadbyte/clay/commit/8c5aae0a0c7eccdedfc862616da3223143cd171a)), closes [#367](https://github.com/chadbyte/clay/issues/367)
+
+## [2.44.1-beta.1](https://github.com/chadbyte/clay/compare/v2.44.0...v2.44.1-beta.1) (2026-06-30)
+
+
+### Bug Fixes
+
+* **os-users:** skip per-user Claude CLI install when already available ([#370](https://github.com/chadbyte/clay/issues/370)) ([761f6a5](https://github.com/chadbyte/clay/commit/761f6a5694a2d0ddb7a6eab4c73ba769f3160097)), closes [#368](https://github.com/chadbyte/clay/issues/368)
+
+# [2.44.0](https://github.com/chadbyte/clay/compare/v2.43.0...v2.44.0) (2026-06-18)
+
+
+### Features
+
+* **sessions:** default Claude sessions to GUI and tidy Chat settings ([#366](https://github.com/chadbyte/clay/issues/366)) ([e25e1b9](https://github.com/chadbyte/clay/commit/e25e1b9f97042cfcb134171b326ac8c900db1f92))
+
+# [2.44.0-beta.1](https://github.com/chadbyte/clay/compare/v2.43.0...v2.44.0-beta.1) (2026-06-18)
+
+
+### Features
+
+* **sessions:** default Claude sessions to GUI and tidy Chat settings ([#366](https://github.com/chadbyte/clay/issues/366)) ([e25e1b9](https://github.com/chadbyte/clay/commit/e25e1b9f97042cfcb134171b326ac8c900db1f92))
+
+# [2.43.0](https://github.com/chadbyte/clay/compare/v2.42.0...v2.43.0) (2026-06-18)
+
+
+### Features
+
+* **tls:** fetch *.d.clay.studio cert at runtime instead of baking into npm ([#365](https://github.com/chadbyte/clay/issues/365)) ([8e02d5c](https://github.com/chadbyte/clay/commit/8e02d5c46115350c7407252012b62c7657b304d3))
+
+# [2.43.0-beta.1](https://github.com/chadbyte/clay/compare/v2.42.0...v2.43.0-beta.1) (2026-06-18)
+
+
+### Features
+
+* **tls:** fetch *.d.clay.studio cert at runtime instead of baking into npm ([#365](https://github.com/chadbyte/clay/issues/365)) ([8e02d5c](https://github.com/chadbyte/clay/commit/8e02d5c46115350c7407252012b62c7657b304d3))
+
+# [2.42.0](https://github.com/chadbyte/clay/compare/v2.41.1...v2.42.0) (2026-06-08)
+
+
+### Features
+
+* **tui:** add bypass-permissions launch option to Claude session button ([#364](https://github.com/chadbyte/clay/issues/364)) ([25da706](https://github.com/chadbyte/clay/commit/25da706a4a3c343641ad9138f08b5805e9824c42))
+
+# [2.42.0-beta.1](https://github.com/chadbyte/clay/compare/v2.41.1...v2.42.0-beta.1) (2026-06-08)
+
+
+### Features
+
+* **tui:** add bypass-permissions launch option to Claude session button ([#364](https://github.com/chadbyte/clay/issues/364)) ([25da706](https://github.com/chadbyte/clay/commit/25da706a4a3c343641ad9138f08b5805e9824c42))
+
+## [2.41.1](https://github.com/chadbyte/clay/compare/v2.41.0...v2.41.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **tui:** read transcript from session owner's home in OS-isolation mode ([3b79723](https://github.com/chadbyte/clay/commit/3b79723b70a80809db41af2d761c4f0b3c6760d5))
+
+## [2.41.1-beta.1](https://github.com/chadbyte/clay/compare/v2.41.0...v2.41.1-beta.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **tui:** read transcript from session owner's home in OS-isolation mode ([3b79723](https://github.com/chadbyte/clay/commit/3b79723b70a80809db41af2d761c4f0b3c6760d5))
+
+# [2.41.0](https://github.com/chadbyte/clay/compare/v2.40.0...v2.41.0) (2026-05-28)
+
+
+### Bug Fixes
+
+* **tui:** keep a session in its live mode for every viewer ([26893de](https://github.com/chadbyte/clay/commit/26893decf81e35b0b64ee288a1068bb0341f3b05))
+* **tui:** tighten grab boundaries against false stops and false matches ([0d3ec5a](https://github.com/chadbyte/clay/commit/0d3ec5ac7328f2b6cd2aeab0b85949a2a8acec5e))
+
+
+### Features
+
+* **server:** let users create their first project from the app shell ([d8cd2b7](https://github.com/chadbyte/clay/commit/d8cd2b792828f036f09f28785d9ede53b7a38f17))
+* **tui:** add D2 Coding font option and bump default size to 14pt ([d3947dd](https://github.com/chadbyte/clay/commit/d3947ddb3908faa290518beb5f9d1d8e45b3e325))
+* **tui:** hover-to-grab assistant messages from xterm output ([91fffed](https://github.com/chadbyte/clay/commit/91fffed9201b256c0b60fe198f7d583144734a97))
+* **tui:** polish grab overlay with entry animation, auto-hide on scroll ([5a02f3d](https://github.com/chadbyte/clay/commit/5a02f3d28a4626c369e8edbe7e15fe31c5f66c04))
+* **tui:** shake icon, blink favicon, and ding on tui_attention ([34fe571](https://github.com/chadbyte/clay/commit/34fe571dacd015d0599ca9590102f877e846cd41))
+
+# [2.41.0-beta.1](https://github.com/chadbyte/clay/compare/v2.40.1-beta.1...v2.41.0-beta.1) (2026-05-28)
+
+
+### Bug Fixes
+
+* **tui:** tighten grab boundaries against false stops and false matches ([0d3ec5a](https://github.com/chadbyte/clay/commit/0d3ec5ac7328f2b6cd2aeab0b85949a2a8acec5e))
+
+
+### Features
+
+* **server:** let users create their first project from the app shell ([d8cd2b7](https://github.com/chadbyte/clay/commit/d8cd2b792828f036f09f28785d9ede53b7a38f17))
+* **tui:** add D2 Coding font option and bump default size to 14pt ([d3947dd](https://github.com/chadbyte/clay/commit/d3947ddb3908faa290518beb5f9d1d8e45b3e325))
+* **tui:** hover-to-grab assistant messages from xterm output ([91fffed](https://github.com/chadbyte/clay/commit/91fffed9201b256c0b60fe198f7d583144734a97))
+* **tui:** polish grab overlay with entry animation, auto-hide on scroll ([5a02f3d](https://github.com/chadbyte/clay/commit/5a02f3d28a4626c369e8edbe7e15fe31c5f66c04))
+* **tui:** shake icon, blink favicon, and ding on tui_attention ([34fe571](https://github.com/chadbyte/clay/commit/34fe571dacd015d0599ca9590102f877e846cd41))
+
+## [2.40.1-beta.1](https://github.com/chadbyte/clay/compare/v2.40.0...v2.40.1-beta.1) (2026-05-27)
+
+
+### Bug Fixes
+
+* **tui:** keep a session in its live mode for every viewer ([26893de](https://github.com/chadbyte/clay/commit/26893decf81e35b0b64ee288a1068bb0341f3b05))
+
+# [2.40.0](https://github.com/chadbyte/clay/compare/v2.39.0...v2.40.0) (2026-05-27)
+
+
+### Bug Fixes
+
+* **claude-hook:** migrate Bash allow-list to space-wildcard form ([a5d52c3](https://github.com/chadbyte/clay/commit/a5d52c3e3e61a32ffd46b9fba28038dbc08a4cc8))
+* **codex:** restore model picker, lock it after first message ([d9d8176](https://github.com/chadbyte/clay/commit/d9d8176fa3e0d0a59105c1f7a1815a174ac86c49)), closes [#361](https://github.com/chadbyte/clay/issues/361)
+* **mobile:** let new-session row pick Codex vs Claude ([2d71f18](https://github.com/chadbyte/clay/commit/2d71f18254e4e85df36b9b2b9a0a2a869559d762)), closes [#361](https://github.com/chadbyte/clay/issues/361)
+* **terminal:** rebuild WebGL glyph atlas on font change and resize ([ebfe3e1](https://github.com/chadbyte/clay/commit/ebfe3e19d6246eaf3a8f90e01416a7c7bc569fb7))
+* **tui:** clear screen after fit dimensions change ([deaeb49](https://github.com/chadbyte/clay/commit/deaeb496f456c44ea1dbf2d811228bbc4456d5df))
+* **tui:** hydrate terminal font prefs on boot ([43b3416](https://github.com/chadbyte/clay/commit/43b3416d25df64b5dbc7f74e8dccff6808cd074c)), closes [user-settings.js#populateAccount](https://github.com/user-settings.js/issues/populateAccount)
+* **vendor:** stop duplicating the active-vendor avatar ([0943097](https://github.com/chadbyte/clay/commit/0943097908effe08bb449cf03902b8b0e2c07229)), closes [#vendor-toggle-wrap](https://github.com/chadbyte/clay/issues/vendor-toggle-wrap)
+
+
+### Features
+
+* **codex:** add gpt-5.5 model selector and make it default ([505b5fe](https://github.com/chadbyte/clay/commit/505b5feb9208592166fc1d2c70c0f652a3d5c558))
+* **tui:** lazy-resume sessions instead of respawning claude on switch ([d56b8f1](https://github.com/chadbyte/clay/commit/d56b8f14a4f917cabe3dd0a0d17fb4c0fa082738))
+* **tui:** move terminal font picker to title bar during TUI sessions ([293b9b4](https://github.com/chadbyte/clay/commit/293b9b4760d1697552975f37cffa2acc4ac06861))
+* **tui:** reclaim idle session PTYs and add explicit Close ([63ac6ba](https://github.com/chadbyte/clay/commit/63ac6bae4b82242c8e001e6e573f009b5d25b639))
+* **tui:** usable mobile input for TUI sessions ([fc0764e](https://github.com/chadbyte/clay/commit/fc0764eb5a715497e7b64978d3cf7975d3edd995))
+
+# [2.40.0-beta.4](https://github.com/chadbyte/clay/compare/v2.40.0-beta.3...v2.40.0-beta.4) (2026-05-27)
+
+
+### Features
+
+* **tui:** lazy-resume sessions instead of respawning claude on switch ([d56b8f1](https://github.com/chadbyte/clay/commit/d56b8f14a4f917cabe3dd0a0d17fb4c0fa082738))
+* **tui:** reclaim idle session PTYs and add explicit Close ([63ac6ba](https://github.com/chadbyte/clay/commit/63ac6bae4b82242c8e001e6e573f009b5d25b639))
+* **tui:** usable mobile input for TUI sessions ([fc0764e](https://github.com/chadbyte/clay/commit/fc0764eb5a715497e7b64978d3cf7975d3edd995))
+
+# [2.40.0-beta.3](https://github.com/chadbyte/clay/compare/v2.40.0-beta.2...v2.40.0-beta.3) (2026-05-26)
+
+
+### Bug Fixes
+
+* **terminal:** rebuild WebGL glyph atlas on font change and resize ([ebfe3e1](https://github.com/chadbyte/clay/commit/ebfe3e19d6246eaf3a8f90e01416a7c7bc569fb7))
+
+# [2.40.0-beta.2](https://github.com/chadbyte/clay/compare/v2.40.0-beta.1...v2.40.0-beta.2) (2026-05-26)
+
+
+### Bug Fixes
+
+* **claude-hook:** migrate Bash allow-list to space-wildcard form ([a5d52c3](https://github.com/chadbyte/clay/commit/a5d52c3e3e61a32ffd46b9fba28038dbc08a4cc8))
+* **codex:** restore model picker, lock it after first message ([d9d8176](https://github.com/chadbyte/clay/commit/d9d8176fa3e0d0a59105c1f7a1815a174ac86c49)), closes [#361](https://github.com/chadbyte/clay/issues/361)
+* **mobile:** let new-session row pick Codex vs Claude ([2d71f18](https://github.com/chadbyte/clay/commit/2d71f18254e4e85df36b9b2b9a0a2a869559d762)), closes [#361](https://github.com/chadbyte/clay/issues/361)
+* **tui:** clear screen after fit dimensions change ([deaeb49](https://github.com/chadbyte/clay/commit/deaeb496f456c44ea1dbf2d811228bbc4456d5df))
+* **tui:** hydrate terminal font prefs on boot ([43b3416](https://github.com/chadbyte/clay/commit/43b3416d25df64b5dbc7f74e8dccff6808cd074c)), closes [user-settings.js#populateAccount](https://github.com/user-settings.js/issues/populateAccount)
+* **vendor:** stop duplicating the active-vendor avatar ([0943097](https://github.com/chadbyte/clay/commit/0943097908effe08bb449cf03902b8b0e2c07229)), closes [#vendor-toggle-wrap](https://github.com/chadbyte/clay/issues/vendor-toggle-wrap)
+
+# [2.40.0-beta.1](https://github.com/chadbyte/clay/compare/v2.39.0...v2.40.0-beta.1) (2026-05-26)
+
+
+### Features
+
+* **codex:** add gpt-5.5 model selector and make it default ([505b5fe](https://github.com/chadbyte/clay/commit/505b5feb9208592166fc1d2c70c0f652a3d5c558))
+* **tui:** move terminal font picker to title bar during TUI sessions ([293b9b4](https://github.com/chadbyte/clay/commit/293b9b4760d1697552975f37cffa2acc4ac06861))
+
+# [2.39.0](https://github.com/chadbyte/clay/compare/v2.38.0...v2.39.0) (2026-05-25)
+
+
+### Bug Fixes
+
+* **sdk-bridge:** preserve MCP-mode AskUserQuestion entries across turn boundaries ([b506369](https://github.com/chadbyte/clay/commit/b506369949a6b27ac7944a0e3b736993db4578d7))
+
+
+### Features
+
+* prepare 2026-06-15 cutover with What's New system ([f02c85b](https://github.com/chadbyte/clay/commit/f02c85b1184be30d901ef34d9e33e99b9d200e1a))
+* **sessions:** embed claude TUI as a session mode with cross-mode resume ([6812ef6](https://github.com/chadbyte/clay/commit/6812ef69de25c39f58ab77fa886579c1522241b6)), closes [#messages](https://github.com/chadbyte/clay/issues/messages) [#input-area](https://github.com/chadbyte/clay/issues/input-area) [#new-msg-btn](https://github.com/chadbyte/clay/issues/new-msg-btn)
+* **settings:** theme picker, terminal font, IME-safe renderer ([04ca4fe](https://github.com/chadbyte/clay/commit/04ca4fe4c0707cddebc71e0540a851aad0ca886c)), closes [#us-theme-switcher](https://github.com/chadbyte/clay/issues/us-theme-switcher)
+* **theme:** move theme picker to user island palette button ([583c43e](https://github.com/chadbyte/clay/commit/583c43e9432afa7fec9bd3fe008a9f4a781e3c54))
+* **tui:** notification pipeline, auto-approve allow-list, inline modal, jsonl watcher ([a012413](https://github.com/chadbyte/clay/commit/a0124133f12f39d950e3c6a95fc07b25ea84e7c5))
+* **tui:** policy explainer modal, Go-to-session secondary CTA, restart persistence ([584beac](https://github.com/chadbyte/clay/commit/584beac4a99a0ada55005290942c8dc626fc0e50))
+* unify CLI sessions with Clay list and clean SDK warmup ([7e4ebdd](https://github.com/chadbyte/clay/commit/7e4ebdd3b966f2e9011ef04265d0885cd132eeb4))
+
+# [2.39.0-beta.5](https://github.com/chadbyte/clay/compare/v2.39.0-beta.4...v2.39.0-beta.5) (2026-05-25)
+
+
+### Features
+
+* **settings:** theme picker, terminal font, IME-safe renderer ([04ca4fe](https://github.com/chadbyte/clay/commit/04ca4fe4c0707cddebc71e0540a851aad0ca886c)), closes [#us-theme-switcher](https://github.com/chadbyte/clay/issues/us-theme-switcher)
+* **theme:** move theme picker to user island palette button ([583c43e](https://github.com/chadbyte/clay/commit/583c43e9432afa7fec9bd3fe008a9f4a781e3c54))
+
+# [2.39.0-beta.4](https://github.com/chadbyte/clay/compare/v2.39.0-beta.3...v2.39.0-beta.4) (2026-05-25)
+
+
+### Features
+
+* unify CLI sessions with Clay list and clean SDK warmup ([7e4ebdd](https://github.com/chadbyte/clay/commit/7e4ebdd3b966f2e9011ef04265d0885cd132eeb4))
+
+# [2.39.0-beta.3](https://github.com/chadbyte/clay/compare/v2.39.0-beta.2...v2.39.0-beta.3) (2026-05-25)
+
+
+### Features
+
+* prepare 2026-06-15 cutover with What's New system ([f02c85b](https://github.com/chadbyte/clay/commit/f02c85b1184be30d901ef34d9e33e99b9d200e1a))
+
+# [2.39.0-beta.2](https://github.com/chadbyte/clay/compare/v2.39.0-beta.1...v2.39.0-beta.2) (2026-05-21)
+
+
+### Features
+
+* **tui:** notification pipeline, auto-approve allow-list, inline modal, jsonl watcher ([a012413](https://github.com/chadbyte/clay/commit/a0124133f12f39d950e3c6a95fc07b25ea84e7c5))
+* **tui:** policy explainer modal, Go-to-session secondary CTA, restart persistence ([584beac](https://github.com/chadbyte/clay/commit/584beac4a99a0ada55005290942c8dc626fc0e50))
+
+# [2.39.0-beta.1](https://github.com/chadbyte/clay/compare/v2.38.0...v2.39.0-beta.1) (2026-05-19)
+
+
+### Bug Fixes
+
+* **sdk-bridge:** preserve MCP-mode AskUserQuestion entries across turn boundaries ([b506369](https://github.com/chadbyte/clay/commit/b506369949a6b27ac7944a0e3b736993db4578d7))
+
+
+### Features
+
+* **sessions:** embed claude TUI as a session mode with cross-mode resume ([6812ef6](https://github.com/chadbyte/clay/commit/6812ef69de25c39f58ab77fa886579c1522241b6)), closes [#messages](https://github.com/chadbyte/clay/issues/messages) [#input-area](https://github.com/chadbyte/clay/issues/input-area) [#new-msg-btn](https://github.com/chadbyte/clay/issues/new-msg-btn)
+
+# [2.38.0](https://github.com/chadbyte/clay/compare/v2.37.0...v2.38.0) (2026-05-16)
+
+
+### Bug Fixes
+
+* **ask-user:** keep question text with the answer so the model recognizes it ([e6fd603](https://github.com/chadbyte/clay/commit/e6fd6035440ef2e76849bb8248eaaf787034a671))
+* **clay:** forward home_clay_* messages to the server-level handler ([a5f789a](https://github.com/chadbyte/clay/commit/a5f789ac9a569c8777506cdad835e56840b4c9c4))
+* **clay:** use Clay app icon for Clay avatar instead of Ally asset ([48a4337](https://github.com/chadbyte/clay/commit/48a4337f60e5bf16d39ed8887e73065fdd1bc68a))
+
+
+### Features
+
+* **clay:** introduce Clay host agent and split Home into Clay chat + widgets ([d6081ae](https://github.com/chadbyte/clay/commit/d6081ae504a4a6cb60f075d56a9205a79ba95ebb))
+* **clay:** smaller FAB-popover and draggable FAB position ([fda4a0f](https://github.com/chadbyte/clay/commit/fda4a0f225b482b10f7b01594143b5a66c98e1e5))
+* **clay:** standalone phablet-style home chat panel and hide Clay from sidebar ([b99dd18](https://github.com/chadbyte/clay/commit/b99dd181f96e830f99859c3855a2cb05dedac80e)), closes [#home-hub](https://github.com/chadbyte/clay/issues/home-hub)
+* **clay:** turn home chat into a persistent FAB-popover ([a55b246](https://github.com/chadbyte/clay/commit/a55b246e342f2f4b12d304d79d77e73a901c43d4)), closes [#clay-fab](https://github.com/chadbyte/clay/issues/clay-fab) [#clay-popover](https://github.com/chadbyte/clay/issues/clay-popover) [#home-hub](https://github.com/chadbyte/clay/issues/home-hub)
+
+# [2.38.0-beta.7](https://github.com/chadbyte/clay/compare/v2.38.0-beta.6...v2.38.0-beta.7) (2026-05-16)
+
+
+### Bug Fixes
+
+* **ask-user:** keep question text with the answer so the model recognizes it ([e6fd603](https://github.com/chadbyte/clay/commit/e6fd6035440ef2e76849bb8248eaaf787034a671))
+
 # [2.38.0-beta.6](https://github.com/chadbyte/clay/compare/v2.38.0-beta.5...v2.38.0-beta.6) (2026-05-08)
 
 

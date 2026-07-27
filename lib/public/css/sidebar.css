@@ -1026,10 +1026,40 @@
   flex-shrink: 0;
 }
 
+.session-top-action-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
 .session-top-action:hover {
   background: var(--sidebar-hover);
   color: var(--text);
   opacity: 1;
+}
+
+/* Split button: main action + chevron sharing one grid cell. */
+.session-top-action-split {
+  display: flex;
+  align-items: stretch;
+  gap: 2px;
+  min-width: 0;
+}
+
+.session-top-action-split .split-main {
+  flex: 1 1 auto;
+  width: auto;
+}
+
+.session-top-action-split .split-chevron {
+  flex: 0 0 auto;
+  width: 28px;
+  min-width: 28px;
+  padding: 0;
+  justify-content: center;
+  gap: 0;
 }
 
 .session-favorites-section {

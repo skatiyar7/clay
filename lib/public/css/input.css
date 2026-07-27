@@ -737,6 +737,24 @@
   flex-shrink: 0;
 }
 #vendor-toggle-wrap.hidden { display: none; }
+
+/* Compact session-vendor icon shown next to the config-chip when the
+   full vendor-toggle is hidden (because the session's vendor is already
+   committed). Visual only - not clickable. */
+#active-vendor-indicator {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 6px;
+  opacity: 0.85;
+  flex-shrink: 0;
+}
+#active-vendor-indicator.hidden { display: none; }
+#active-vendor-icon {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  object-fit: cover;
+}
 #vendor-toggle-wrap.locked {
   border: none;
   height: auto;
@@ -1134,6 +1152,18 @@
 /* Desktop: hide mobile-only, show desktop-only */
 @media (min-width: 769px) {
   .mobile-only { display: none !important; }
+}
+
+/* Mobile TUI: the composer is a plain conduit to the PTY (session-tui-view.js
+   toggles body.tui-composer-active). Hide controls that don't apply to a
+   terminal session - scheduled send, @mentions, and model/vendor config.
+   Attach (files/images -> path injection) and voice input stay available. */
+body.tui-composer-active #schedule-btn,
+body.tui-composer-active #ask-mate-btn,
+body.tui-composer-active #vendor-toggle-wrap,
+body.tui-composer-active #active-vendor-indicator,
+body.tui-composer-active #config-chip-wrap {
+  display: none !important;
 }
 
 /* ==========================================================================

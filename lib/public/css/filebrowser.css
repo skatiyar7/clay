@@ -1414,7 +1414,7 @@
 }
 
 /* --- Terminal key toolbar (mobile) --- */
-#terminal-toolbar {
+.term-toolbar {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -1426,7 +1426,7 @@
   -webkit-overflow-scrolling: touch;
 }
 
-#terminal-toolbar.hidden { display: none; }
+.term-toolbar.hidden { display: none; }
 
 .term-key {
   display: flex;

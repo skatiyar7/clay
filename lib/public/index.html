@@ -18,6 +18,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;700&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<!-- Monospace web fonts used by the TUI font picker in the title bar.
+     SF Mono is Apple-system-only (no Google Fonts entry) and
+     ui-monospace is a system keyword - both rely on the user's OS. -->
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Fira+Code:wght@400;500;700&family=Cascadia+Code:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;700&family=Source+Code+Pro:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- D2 Coding isn't on Google Fonts and its CJK woff2 is ~1.4MB, so it
+     is lazy-loaded by terminal-prefs.js the first time the user selects
+     it (or boots with it already saved). See ensureD2CodingWebfont(). -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@xterm/xterm@5/css/xterm.min.css">
 <script>
 (function(){try{var k="clay-theme-vars",v=localStorage.getItem(k),r=document.documentElement;if(v){var o=JSON.parse(v),p;for(p in o)r.style.setProperty(p,o[p]);var vt=localStorage.getItem(k.replace("-vars","-variant"));if(vt==="light"){r.classList.add("light-theme");r.classList.remove("dark-theme")}else{r.classList.add("dark-theme");r.classList.remove("light-theme")}var m=document.querySelector('meta[name="theme-color"]');if(m&&o["--bg"])m.setAttribute("content",o["--bg"])}else{var sl=window.matchMedia&&window.matchMedia("(prefers-color-scheme: light)").matches;if(sl){r.classList.add("light-theme");r.classList.remove("dark-theme")}}}catch(e){}})();
@@ -158,6 +165,13 @@
           <div class="hub-week-strip" id="hub-week-strip"></div>
         </div>
 
+        <div class="hub-card hub-whats-new-card" id="hub-whats-new-card">
+          <div class="hub-card-header">
+            <span class="hub-card-title">What's New</span>
+          </div>
+          <div class="hub-whats-new" id="hub-whats-new"></div>
+        </div>
+
         <div class="hub-card hub-playbooks" id="hub-playbooks">
           <div class="hub-card-header">
             <span class="hub-card-title">Quick Start</span>
@@ -182,6 +196,20 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="whats-new-article" class="hidden">
+      <header class="wna-toolbar">
+        <button type="button" class="wna-back" id="wna-back">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+          <span>Back</span>
+        </button>
+      </header>
+      <article class="wna-content">
+        <div class="wna-date" id="wna-date"></div>
+        <h1 class="wna-title" id="wna-title"></h1>
+        <div class="wna-body" id="wna-body"></div>
+      </article>
     </div>
     <div id="sidebar-column">
       <div class="title-bar-sidebar">
@@ -345,6 +373,7 @@
           <span class="header-title" id="header-title">Connecting...</span>
           <button id="header-info-btn" type="button" title="Session info"><i data-lucide="info"></i></button>
           <button id="header-rename-btn" type="button" title="Rename session"><i data-lucide="pencil"></i></button>
+          <button type="button" id="header-tui-close-btn" class="header-tui-close-btn hidden" title="Close terminal (keeps history, resume anytime)" aria-label="Close terminal"><i data-lucide="power"></i></button>
           <div id="mate-mobile-title" class="mate-mobile-title hidden">
             <img id="mate-mobile-avatar" class="mate-mobile-avatar" alt="">
             <span id="mate-mobile-name" class="mate-mobile-name"></span>
@@ -354,6 +383,9 @@
         <div id="ralph-sticky" class="hidden"></div>
         <div id="debate-sticky" class="hidden"></div>
         <div class="status">
+          <button type="button" id="header-tui-font-btn" class="header-tui-font-btn hidden" title="Terminal font" aria-label="Terminal font">
+            <i data-lucide="type"></i>
+          </button>
           <button id="debate-pdf-btn" class="hidden" title="Export debate as PDF"><i data-lucide="download"></i></button>
           <button id="find-in-session-btn" title="Search in session (Ctrl+F)"><i data-lucide="search"></i></button>
           <button id="terminal-toggle-btn" title="Terminal"><i data-lucide="square-terminal"></i><span id="terminal-count" class="hidden"></span></button>
@@ -489,6 +521,9 @@
                   <img src="/codex-avatar.png" class="vendor-toggle-icon" alt="Codex">
                   <span class="vendor-toggle-label">Codex</span>
                 </button>
+              </div>
+              <div id="active-vendor-indicator" class="hidden" title="Session vendor">
+                <img id="active-vendor-icon" alt="">
               </div>
               <div id="config-chip-wrap" class="hidden">
                 <button id="config-chip" title="Model, mode, and effort settings">
@@ -832,7 +867,7 @@
         <button class="file-viewer-btn" id="terminal-close" title="Hide panel"><i data-lucide="minus"></i></button>
       </div>
     </div>
-    <div id="terminal-toolbar" class="hidden">
+    <div id="terminal-toolbar" class="term-toolbar hidden">
       <button class="term-key" data-key="tab">Tab</button>
       <button class="term-key term-key-toggle" data-key="ctrl">Ctrl</button>
       <button class="term-key" data-key="esc">Esc</button>
@@ -863,7 +898,7 @@
       </div>
     </div>
     <div class="user-island-actions">
-      <button id="user-theme-toggle-btn" title="Switch theme" aria-label="Switch theme"><i data-lucide="moon"></i></button>
+      <button id="user-theme-toggle-btn" title="Themes" aria-label="Themes"><i data-lucide="palette"></i></button>
       <button id="user-settings-btn" title="User settings"><i data-lucide="settings"></i></button>
     </div>
   </div>
@@ -986,21 +1021,6 @@
         <div class="us-section" data-section="us-appearance">
           <h2>Appearance</h2>
           <div class="settings-card">
-            <div class="settings-label" style="margin-bottom:10px;">Theme</div>
-            <div class="layout-switcher" id="us-theme-switcher">
-              <button class="layout-option" data-theme="light">
-                <span class="layout-option-icon">☀️</span>
-                <span class="layout-option-label">Light</span>
-                <span class="layout-option-desc">For people who open curtains. Bright, clean, productive.</span>
-              </button>
-              <button class="layout-option" data-theme="dark">
-                <span class="layout-option-icon">🌙</span>
-                <span class="layout-option-label">Dark</span>
-                <span class="layout-option-desc">For those who thrive after sunset. Your screen, your cave.</span>
-              </button>
-            </div>
-          </div>
-          <div class="settings-card">
             <div class="settings-label" style="margin-bottom:10px;">Chat layout</div>
             <div class="layout-switcher" id="us-layout-switcher">
               <button class="layout-option" data-layout="bubble">
@@ -1044,6 +1064,31 @@
               <input type="checkbox" id="us-auto-continue">
               <span class="toggle-track"><span class="toggle-thumb"></span></span>
             </label>
+          </div>
+          <div class="settings-card">
+            <label class="settings-toggle-row">
+              <div>
+                <span class="settings-label">Open Claude as terminal (TUI)</span>
+                <div class="settings-hint">Render Claude sessions in an embedded <code>claude</code> terminal instead of Clay's chat UI. Applies on the next session open.</div>
+              </div>
+              <input type="checkbox" id="us-claude-open-mode">
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="settings-card">
+            <div class="settings-card-body">
+              <div class="settings-label">Auto-approved commands</div>
+              <div class="settings-hint">Extra patterns Clay should pre-approve in your <code>~/.claude/settings.json</code> so TUI sessions don't prompt for them. One per line. Examples: <code>Bash(npm test:*)</code>, <code>Read</code>, <code>mcp__myserver__*</code>. Clay's safe defaults (read-only tools, common git/ls/grep) are always applied on top and shown below for reference.</div>
+              <textarea id="us-claude-allow-list" rows="6" spellcheck="false" placeholder="Bash(npm test:*)&#10;Bash(make:*)"></textarea>
+              <div class="settings-allow-actions">
+                <button type="button" id="us-claude-allow-save" class="settings-action">Save</button>
+                <span id="us-claude-allow-status" class="settings-allow-status"></span>
+              </div>
+              <details class="settings-allow-defaults">
+                <summary>Show Clay's managed defaults</summary>
+                <div id="us-claude-allow-managed" class="settings-allow-managed"></div>
+              </details>
+            </div>
           </div>
         </div>
 
@@ -1114,6 +1159,7 @@
           </optgroup>
           <optgroup label="Server">
             <option value="keep-awake" class="hidden" id="settings-keep-awake-opt">Keep Awake</option>
+            <option value="inherit-groups" class="hidden" id="settings-inherit-groups-opt">User Groups</option>
             <option value="restart">Restart</option>
             <option value="shutdown">Shutdown</option>
           </optgroup>
@@ -1140,6 +1186,7 @@
           <div class="settings-nav-separator"></div>
           <div class="settings-nav-category">Server</div>
           <button class="settings-nav-item hidden" data-section="keep-awake" id="settings-keep-awake-nav"><span>Keep Awake</span></button>
+          <button class="settings-nav-item hidden settings-admin-only" data-section="inherit-groups" id="settings-inherit-groups-nav"><span>User Groups</span></button>
           <button class="settings-nav-item" data-section="restart"><span>Restart</span></button>
           <button class="settings-nav-item settings-nav-danger" data-section="shutdown"><span>Shutdown</span></button>
         </div>
@@ -1393,6 +1440,19 @@
             </label>
           </div>
         </div>
+        <div class="server-settings-section hidden settings-admin-only" data-section="inherit-groups" id="settings-inherit-groups-section">
+          <h2>User Groups</h2>
+          <div class="settings-card">
+            <label class="settings-toggle-row">
+              <div>
+                <span class="settings-label">Inherit supplementary groups</span>
+                <div class="settings-hint">Give each session the user's full group membership (docker, video, etc.), matching a normal login. Disable to run sessions with only the primary group. Requires <code>setpriv</code> (util-linux). Applies to new sessions.</div>
+              </div>
+              <input type="checkbox" id="settings-inherit-groups">
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+        </div>
         <div class="server-settings-section" data-section="restart">
           <h2>Restart</h2>
           <p class="settings-hint" style="margin-bottom: 16px;">Restart the Clay daemon process. All active sessions will be briefly interrupted and clients will automatically reconnect.</p>
@@ -1513,26 +1573,6 @@
     </div>
     <div class="confirm-actions">
       <button class="confirm-btn confirm-cancel" id="notif-help-close">Close</button>
-    </div>
-  </div>
-</div>
-
-<div id="resume-modal" class="hidden">
-  <div class="confirm-backdrop"></div>
-  <div class="confirm-dialog resume-picker-dialog">
-    <div class="resume-modal-title">Resume CLI session</div>
-    <div class="resume-picker-body">
-      <div id="resume-picker-loading" class="resume-picker-loading">
-        <div class="resume-picker-spinner"></div>
-        <span>Loading sessions...</span>
-      </div>
-      <div id="resume-picker-empty" class="resume-picker-empty hidden">
-        No CLI sessions found for this project.
-      </div>
-      <div id="resume-picker-list" class="resume-picker-list hidden"></div>
-    </div>
-    <div class="confirm-actions">
-      <button class="confirm-btn confirm-cancel" id="resume-cancel">Cancel</button>
     </div>
   </div>
 </div>
@@ -2302,48 +2342,7 @@
   </div>
 </div>
 
-<!-- === Clay FAB + Popover ===
-     Persistent floating-action button (bottom-right) that opens a
-     phablet-style chat with Clay (the host agent). The popover overlays
-     the page content and does NOT interfere with the active project
-     session — talks via dedicated home_clay_* WS messages. -->
-<button id="clay-fab" class="clay-fab" type="button" aria-label="Open Clay" title="Ask Clay">
-  <img class="clay-fab-icon" src="/icon-banded-76.png" alt="Clay">
-  <span class="clay-fab-pulse"></span>
-</button>
-
-<div id="clay-popover" class="clay-popover hidden" role="dialog" aria-modal="false" aria-labelledby="home-chat-title-text">
-  <div class="home-chat-frame">
-    <div class="home-chat-header">
-      <div class="home-chat-avatar-wrap">
-        <img class="home-chat-avatar" src="/icon-banded-76.png" alt="Clay">
-      </div>
-      <div class="home-chat-title-block">
-        <div class="home-chat-title" id="home-chat-title-text">Clay</div>
-        <div class="home-chat-subtitle">Your workspace memory</div>
-      </div>
-      <button id="home-chat-new-btn" class="home-chat-icon-btn" title="Start a new conversation" aria-label="New conversation">
-        <i data-lucide="plus"></i>
-      </button>
-      <button id="home-chat-close-btn" class="home-chat-icon-btn" title="Close" aria-label="Close">
-        <i data-lucide="x"></i>
-      </button>
-    </div>
-    <div id="home-chat-messages" class="home-chat-messages">
-      <!-- messages rendered by home-chat.js -->
-    </div>
-    <div class="home-chat-typing hidden" id="home-chat-typing">
-      <span class="home-chat-typing-dot"></span>
-      <span class="home-chat-typing-dot"></span>
-      <span class="home-chat-typing-dot"></span>
-    </div>
-    <div class="home-chat-input-row">
-      <textarea id="home-chat-input" class="home-chat-input" rows="1" placeholder="Ask Clay…" autocomplete="off"></textarea>
-      <button id="home-chat-send-btn" class="home-chat-send-btn" disabled aria-label="Send">
-        <i data-lucide="arrow-up"></i>
-      </button>
-    </div>
-  </div>
-</div>
+<!-- Clay FAB + popover disabled. Markup intentionally removed; assets
+     (home-chat.js / home-chat.css) remain in repo for future re-enable. -->
 </body>
 </html>

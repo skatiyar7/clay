@@ -358,6 +358,42 @@
     background: rgba(var(--overlay-rgb), 0.06);
   }
 
+  /* Vendor-split row: Claude + Codex side-by-side. Used inside
+     renderMobileSessionsInto so users can pick the vendor on mobile, the
+     same way the desktop sidebar already does. */
+  .mobile-session-new-row {
+    display: flex;
+    gap: 6px;
+    padding: 6px 8px 8px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .mobile-session-new-row .mobile-session-new-vendor {
+    flex: 1 1 0;
+    width: auto;
+    margin-bottom: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    background: rgba(var(--overlay-rgb), 0.03);
+    color: var(--text);
+    justify-content: center;
+    gap: 8px;
+  }
+  .mobile-session-new-row .mobile-session-new-vendor:last-of-type {
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .mobile-session-new-row .mobile-session-new-vendor:active {
+    background: rgba(var(--overlay-rgb), 0.1);
+  }
+  .mobile-session-new-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    border-radius: 4px;
+    object-fit: cover;
+  }
+
   /* --- Chat filter bar (horizontal scroll chips) --- */
   .mobile-chat-filter-bar {
     display: flex;

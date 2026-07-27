@@ -37,6 +37,7 @@ var { loadConfig, saveConfig, configPath, socketPath, logPath, ensureConfigDir, 
 var { sendIPCCommand } = require("../lib/ipc");
 var { generateAuthToken } = require("../lib/server");
 var { enableMultiUser, disableMultiUser, hasAdmin, isMultiUser, getSetupCode } = require("../lib/users");
+var clayStudioCert = require("../lib/clay-studio-cert");
 
 function openUrl(url) {
   try {
@@ -571,6 +572,12 @@ function getAllIPs() {
 
 function getBuiltinCert() {
   try {
+    // Prefer the cert fetched at runtime from the clay.studio endpoint (always
+    // current) over the copy baked into the package (expires ~90 days after
+    // publish). forkDaemon refreshes this cache before we get here.
+    var fetched = clayStudioCert.cachedCertFiles();
+    if (fetched) return { key: fetched.key, cert: fetched.cert, caRoot: null, builtin: true };
+
     var certDir = path.join(__dirname, "..", "lib", "certs");
     var keyPath = path.join(certDir, "privkey.pem");
     var certPath = path.join(certDir, "fullchain.pem");
@@ -1356,21 +1363,13 @@ function setup(callback) {
           }
           port = p;
           log(sym.bar);
-          askMode();
+          // No "single vs multi" question anymore: every deploy runs in the
+          // (general) multi-user model. Solo users get an auto-provisioned
+          // default admin with no PIN and no login wall. OS-level user
+          // isolation stays an opt-in, offered here on Linux and toggleable
+          // later; everything else is just multi-user.
+          askOsUsers("multi");
         });
-      });
-    }
-
-    function askMode() {
-      promptSelect("How will you use Clay?", [
-        { label: "Just me (single user)", value: "single" },
-        { label: "Multiple users", value: "multi" },
-      ], function (mode) {
-        if (mode === "single") {
-          finishSetup(mode, false);
-        } else {
-          askOsUsers(mode);
-        }
       });
     }
 
@@ -1462,13 +1461,19 @@ async function forkDaemon(mode, keepAwake, extraProjects, addCwd, wantOsUsers) {
   var mkcertDetected = false;
 
   if (useHttps) {
+    // Refresh the runtime cert cache from the clay.studio endpoint (best effort,
+    // short timeout) so getBuiltinCert picks up the current auto-renewed cert
+    // instead of the stale baked copy. Skipped when the user forces mkcert.
+    if (!forceMkcert) {
+      try { await clayStudioCert.refreshCache(5000); } catch (e) {}
+    }
     var certPaths = ensureCerts(ip);
     if (certPaths) {
       hasTls = true;
       if (certPaths.builtin) hasBuiltinCert = true;
       if (certPaths.mkcertDetected) mkcertDetected = true;
     } else {
-      log(sym.warn + "  " + a.yellow + "HTTPS unavailable" + a.reset + a.dim + " · mkcert not installed" + a.reset);
+      log(sym.warn + "  " + a.yellow + "HTTPS unavailable" + a.reset + a.dim + " · could not obtain a certificate" + a.reset);
     }
   }
 
@@ -1545,7 +1550,7 @@ async function forkDaemon(mode, keepAwake, extraProjects, addCwd, wantOsUsers) {
     keepAwake: keepAwake,
     dangerouslySkipPermissions: dangerouslySkipPermissions,
     osUsers: wantOsUsers || osUsersMode,
-    mode: mode || "single",
+    mode: mode || "multi",
     setupCompleted: true,
     projects: allProjects,
   });
@@ -1644,6 +1649,12 @@ async function devMode(mode, keepAwake, existingPinHash, wantOsUsers) {
   var mkcertDetected = false;
 
   if (useHttps) {
+    // Refresh the runtime cert cache from the clay.studio endpoint (best effort,
+    // short timeout) so getBuiltinCert picks up the current auto-renewed cert
+    // instead of the stale baked copy. Skipped when the user forces mkcert.
+    if (!forceMkcert) {
+      try { await clayStudioCert.refreshCache(5000); } catch (e) {}
+    }
     var certPaths = ensureCerts(ip);
     if (certPaths) {
       hasTls = true;
@@ -1714,7 +1725,7 @@ async function devMode(mode, keepAwake, existingPinHash, wantOsUsers) {
     debug: true,
     keepAwake: keepAwake || false,
     dangerouslySkipPermissions: dangerouslySkipPermissions,
-    mode: mode || "single",
+    mode: mode || "multi",
     setupCompleted: true,
     projects: allProjects,
     osUsers: wantOsUsers || (prevDevConfig ? (prevDevConfig.osUsers || false) : false),
@@ -1855,6 +1866,9 @@ async function devMode(mode, keepAwake, existingPinHash, wantOsUsers) {
 // ==============================
 async function restartDaemonWithTLS(config, callback) {
   var ip = getLocalIP();
+  if (!forceMkcert) {
+    try { await clayStudioCert.refreshCache(5000); } catch (e) {}
+  }
   var certPaths = ensureCerts(ip);
   if (!certPaths) {
     callback(config);
@@ -2757,7 +2771,7 @@ var currentVersion = require("../package.json").version;
 
     if (isRepeatRun || autoYes) {
       // Repeat run or --yes: skip wizard, reuse saved config
-      var savedMode = (savedConfig && savedConfig.mode) || "single";
+      var savedMode = (savedConfig && savedConfig.mode) || "multi";
       var savedKeepAwake = (savedConfig && savedConfig.keepAwake) || false;
       var savedOsUsers = (savedConfig && savedConfig.osUsers) || false;
 

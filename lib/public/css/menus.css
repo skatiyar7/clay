@@ -43,6 +43,29 @@
 #header-rename-btn:hover { color: var(--text-secondary); background: rgba(var(--overlay-rgb),0.04); border-color: var(--border); }
 #header-rename-btn .lucide { width: 13px; height: 13px; }
 
+/* "Close terminal" button: sits just left of the rename pencil during a live
+   TUI session. Matches the rename button's chrome; reds out on hover since it
+   stops the running claude (the session stays resumable). */
+#header-tui-close-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid transparent;
+  background: none;
+  color: var(--text-dimmer);
+  cursor: pointer;
+  border-radius: 8px;
+  flex-shrink: 0;
+  padding: 0;
+  margin-left: 4px;
+  transition: color 0.15s, background 0.15s, border-color 0.15s;
+}
+#header-tui-close-btn:hover { color: var(--error); background: rgba(var(--overlay-rgb),0.04); border-color: var(--border); }
+#header-tui-close-btn .lucide { width: 14px; height: 14px; }
+#header-tui-close-btn.hidden { display: none; }
+
 #header-info-btn {
   display: flex;
   align-items: center;
@@ -543,6 +566,27 @@
 
 .config-radio-item:hover { background: rgba(var(--overlay-rgb),0.05); color: var(--text); }
 .config-radio-item.active { color: var(--accent); font-weight: 600; }
+
+/* Locked picker items (Codex GUI sessions after the first message: model
+   is bound to the thread, picks would be silently ignored). Active model
+   stays slightly more legible so the user can still see which one's live. */
+.config-radio-item.locked {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.config-radio-item.locked:hover {
+  background: transparent;
+  color: var(--text-secondary);
+}
+.config-radio-item.locked.active {
+  opacity: 0.85;
+}
+.config-model-hint {
+  padding: 4px 14px 10px;
+  font-size: 11px;
+  color: var(--text-dimmer);
+  font-style: italic;
+}
 
 /* Segmented control for effort */
 .config-segmented {
